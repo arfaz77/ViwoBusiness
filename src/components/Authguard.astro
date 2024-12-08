@@ -1,0 +1,9 @@
+---
+import { isAuthenticated } from "../utils/auth";
+
+if (!isAuthenticated()) {
+  window.location.href = "/";
+}
+---
+
+<slot />
