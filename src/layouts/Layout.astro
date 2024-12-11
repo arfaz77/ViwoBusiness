@@ -1,3 +1,8 @@
+---
+import Header from "../components/header.astro";
+import Sidebar from "../components/sidebar.astro";
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -8,7 +13,16 @@
 		<title>Astro Basics</title>
 	</head>
 	<body>
+		<Header />
+		<Sidebar/>
+		<div class="flex pt-16 overflow-hidden bg-gray-50 ">
+			<div
+				id="main-content"
+				class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 min-h-screen"
+			>
 		<slot />
+			</div>
+		</div>
 	</body>
 </html>
 

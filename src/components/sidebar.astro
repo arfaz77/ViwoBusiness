@@ -1,0 +1,44 @@
+---
+const sidebarItems = [
+  { name: 'CRUD', link: '/crud', icon: 'crud-icon' },
+  { name: 'Settings', link: '/settings', icon: 'settings-icon' },
+  { name: 'Pages', link: '/pages', icon: 'pages-icon' },
+  { name: 'Playground', link: '/playground', icon: 'playground-icon' }
+];
+---
+
+<aside id="sidebar" class="fixed top-0 left-0 z-20 flex flex-col w-64 h-full pt-16">
+  <div class="relative flex flex-col flex-1 min-h-0 pt-0 bg-white border-r">
+    <div class="flex-1 px-3 py-5 space-y-2">
+      <ul>
+        {sidebarItems.map((item, index) => (
+          <li key={index}>
+            <a href={item.link} class="flex items-center p-2 text-base text-gray-900 hover:bg-gray-100">
+              <svg class="w-6 h-6 text-gray-500">
+                <use xlink:href={`#${item.icon}`} />
+              </svg>
+              <span class="ml-3">{item.name}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<!-- Backdrop -->
+<div id="sidebarBackdrop" class="hidden fixed inset-0 bg-black opacity-50"></div>
+
+<!-- Hamburger button for mobile -->
+<button id="hamburgerButton" class="block md:hidden">
+  <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+  </svg>
+</button>
+
+<!-- Close button for mobile -->
+<button id="closeButton" class="hidden md:block">
+  <svg class="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+  </svg>
+</button>
