@@ -1,23 +1,28 @@
 ---
-import astroLogo from '../assets/astro.svg';
-import background from '../assets/background.svg';
-import Home from '../layouts/Home.astro';
+import astroLogo from "../assets/astro.svg";
+import background from "../assets/background.svg";
+import Card from "../components/reusable/Card.astro";
+import Home from "../layouts/Home.astro";
 ---
+
 <Home>
-<div id="container" >
-	<div>
+  <div
+    id="container"
+    class="grid grid-cols-2 text-white gap-5 pt-6 h-dvh p-28 
+	bg-background: rgba(254, 246, 239, 1);
+"
+  >
+    <Card heading={"Digital Catalog"}, 
+	content={"Create your own digital catalog with ease. Add products, images, anddescriptions to showcase your offerings online"}
+	image={"/digitalcatalog.png"} />
+    <Card heading={"Digital Business Card"}, 
+	content={"Create your own digital catalog with ease. Add products, images, anddescriptions to showcase your offerings online"}
+	image={"/businesscard.png"}/>
+	<Card heading={"Mini Website"}, 
+	content={"Create your own digital catalog with ease. Add products, images, anddescriptions to showcase your offerings online"}
+	image={"/miniwebsite.png"}/>
 
-    </div>
-	<div>
-        
-    </div>
-    <div>
-        
-    </div>
-
-</div>
-</Home>
-<!-- <style>
+    <!-- <style>
 	#background {
 		position: fixed;
 		top: 0;
@@ -183,3 +188,5 @@ import Home from '../layouts/Home.astro';
 		}
 	}
 </style> -->
+  </div></Home
+>

@@ -1,0 +1,25 @@
+---
+const {heading,content,image}=Astro.props
+
+---
+<div class="relative p-8">
+    <div class="bg-orange-500 h-72 flex rounded-3xl pt-6 px-4">
+      <div class="w-2/3">
+        <h1 class="text-3xl font-semibold">{heading}</h1>
+        <p class="mt-10">
+          {content}
+        </p>
+        
+          <button class="bg-blue-600 rounded-lg w-20 h-8 mt-3 ">
+              Explore
+            </button>
+          
+      </div>
+
+      <img
+        class="absolute right-0 h-72 w-72"
+        src={image}
+        alt="DigitalCatalog"
+      />
+    </div>
+  </div>
