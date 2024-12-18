@@ -1,0 +1,29 @@
+---
+import Header from "../components/header.astro";
+
+
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro Basics</title>
+	</head>
+	<body>
+		<Header />
+		
+		<div class="flex pt-16 overflow-hidden bg-gray-50 h-dvh ">
+			<div
+				id="main-content"
+				class="relative w-full h-full  bg-gray-50  "
+			>
+		<slot />
+			</div>
+		</div>
+	</body>
+</html>
+
+
