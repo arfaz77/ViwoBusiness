@@ -1,12 +1,32 @@
 ---
 import LoginForm from "../components/loginForm.astro";
 import Layout from "../layouts/Layout.astro";
-
-
 ---
 
-
-  <div class="flex justify-center items-center min-h-[80vh]">
-    <LoginForm />
-  </div>
-
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Basics</title>
+  </head>
+  <body>
+    <div class="flex overflow-hidden bg-gray-50">
+      <div
+        id="main-content"
+        class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 min-h-screen"
+      >
+      <div class="h-dvh w-full flex ">
+        <LoginForm />
+        <div class="flex w-1/2 relative">
+          <div class="bg-orange-400 rounded-t-full w-60 h-full p-40 mt-40 ">
+          </div>
+          <img class="absolute w-96 z-40 mt-52" src="/digitalcatalog.png " alt="loginpage">
+        </div>
+      </div>
+      </div>
+    </div>
+  </body>
+</html>
