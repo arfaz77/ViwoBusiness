@@ -1,0 +1,46 @@
+---
+// Fetch token
+const response = await fetch('https://viwo-admin.vercel.app/api/users/login', {
+  method: "POST",
+  credentials: "include",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    email: "amjadalipaduppu@gmail.com",
+    password: "Amjad@123"
+  }),
+});
+
+const data = await response.json();
+const token = data?.token;
+
+// Fetch products using the token
+let products = null;
+
+if (token) {
+  const productResponse = await fetch('https://viwo-admin.vercel.app/api/products', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  products = await productResponse.json();
+}
+---
+
+<html>
+  <body>
+    <h1>Fetched Data</h1>
+
+    <h2>Token</h2>
+    <pre>{JSON.stringify(data?.token ?? "No Token Found", null, 2)}</pre>
+
+    <h2>Products</h2>
+    {products ? (
+      <pre>{JSON.stringify(products, null, 2)}</pre>
+    ) : (
+      <p>No products available or error fetching products.</p>
+    )}
+  </body>
+</html>
