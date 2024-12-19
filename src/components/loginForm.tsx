@@ -1,32 +1,40 @@
+import { createSignal } from 'solid-js';
 import { createForm } from '@felte/solid';
 import { validator } from '@felte/validator-yup';
 import * as yup from 'yup';
 import { login } from '../utils/auth';
 
+
 const schema = yup.object({
-  email: yup.string().email('Invalid email address').required('Email is required'),
-  password: yup
-    .string()
-    .min(6, 'Password must be at least 6 characters long')
-    .required('Password is required'),
+  email: yup.string().email('Invalid email').required('Email is required'),
+  password: yup.string().min(6, 'Min 6 characters').required('Password required'),
 });
 
 const LoginForm = () => {
+  const [loading, setLoading] = createSignal(false);
+  const [errorMsg, setErrorMsg] = createSignal('');
+
   const { form, errors } = createForm({
     onSubmit: async (values) => {
       try {
+        setLoading(true);
+        setErrorMsg('');
         const response = await login(values.email, values.password);
-        console.log('User logged in successfully:', response.user);
-
-        window.location.href = '/dashboard'; // Redirect after login
-      } catch (err) {
-        if (err instanceof Error) {
-          alert(err.message); // User-friendly error message
-          console.error(err.message);
-        } else {
-          alert('An unknown error occurred.');
-          console.error('Unknown error:', err);
+        
+        if (response.user) {
+          // Redirect based on user role
+          const redirectPath = response.user.role === 'admin' 
+            ? '/'
+            : response.user.role === 'moderator'
+            ? '/'
+            : '/';
+            
+          window.location.href = redirectPath;
         }
+      } catch (err) {
+        setErrorMsg(err instanceof Error ? err.message : 'Login failed');
+      } finally {
+        setLoading(false);
       }
     },
     extend: validator({ schema }),
@@ -34,10 +42,15 @@ const LoginForm = () => {
 
   return (
     <div class="flex justify-center w-1/2 items-center px-16">
-     <form use:form class="bg-white shadow-md rounded-2xl px-8 pt-6 pb-2 mb-2 w-fit h-96">
+      <form use:form class="bg-white shadow-md rounded-2xl px-8 pt-6 pb-2 mb-2 w-fit h-96">
         <h2 class="text-2xl font-bold mb-6 text-center">Welcome!</h2>
-
-        <div class="relative mt-4">
+        
+        {errorMsg() && (
+          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+            {errorMsg()}
+          </div>
+        )}
+ <div class="relative mt-4">
           <input
             id="email"
             name="email"
@@ -73,12 +86,15 @@ const LoginForm = () => {
           {errors().password && <span class="text-red-500 text-sm">{errors().password}</span>}
         </div>
 
+        {/* Your existing form fields */}
+        
         <div class="flex items-center justify-between mt-4">
           <button
             type="submit"
-            class="bg-orange-500 hover:bg-orange-700 text-white font-bold pb-2.5 pt-4 px-32 rounded-3xl focus:outline-none focus:shadow-outline"
+            disabled={loading()}
+            class="bg-orange-500 hover:bg-orange-700 text-white font-bold pb-2.5 pt-4 px-32 rounded-3xl focus:outline-none focus:shadow-outline disabled:opacity-50"
           >
-            Login
+            {loading() ? 'Logging in...' : 'Login'}
           </button>
         </div>
       </form>
