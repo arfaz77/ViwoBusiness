@@ -1,0 +1,11 @@
+---
+import { isAuthenticated } from '../../utils/auth';
+
+const auth = await isAuthenticated(Astro.request);
+
+if (!auth.isAuthenticated) {
+  return Astro.redirect('/login');
+}
+---
+
+<slot />
